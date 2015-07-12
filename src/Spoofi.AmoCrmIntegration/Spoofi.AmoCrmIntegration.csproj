@@ -48,6 +48,7 @@
     <Compile Include="AmoCrmEntity\CrmAccountInfo.cs" />
     <Compile Include="Dtos\CrmAccountInfoResponse.cs" />
     <Compile Include="Methods\AmoMethod.cs" />
+    <Compile Include="Misc\StringExtensions.cs" />
     <Compile Include="Service\AmoCrmService.cs" />
     <Compile Include="Interface\IAmoCrmService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,4 +1,5 @@
 ﻿using System;
+using Spoofi.AmoCrmIntegration.Misc;
 
 namespace Spoofi.AmoCrmIntegration
 {
@@ -60,11 +61,6 @@ namespace Spoofi.AmoCrmIntegration
             get { return string.Format("https://{0}.amocrm.ru/private/api/v2/json/contacts/set", Subdomain); }
         }
 
-        public string ViewContactUrl
-        {
-            get { return string.Format("https://{0}.amocrm.ru/private/contacts/edit.php?ID=", Subdomain); }
-        }
-
         public string SetTaskUrl
         {
             get { return string.Format("https://{0}.amocrm.ru/private/api/v2/json/tasks/set", Subdomain); }
@@ -75,14 +71,9 @@ namespace Spoofi.AmoCrmIntegration
             get { return string.Format("https://{0}.amocrm.ru/private/api/v2/json/leads/list?", Subdomain); }
         }
 
-        public string ViewDealUrl
-        {
-            get { return string.Format("https://{0}.amocrm.ru/private/deals/edit.php?ID=", Subdomain); }
-        }
-
         public bool IsReady
         {
-            get { return (!string.IsNullOrEmpty(UserHash) && UserLogin != null && Subdomain != null); } // TODO сделать экстеншен для строк, которыу будет проверять есть ли значение
+            get { return (UserHash.HasValue() && UserLogin.HasValue() && Subdomain.HasValue()); }
         }
 
         public int? LimitRows { get; set; }
