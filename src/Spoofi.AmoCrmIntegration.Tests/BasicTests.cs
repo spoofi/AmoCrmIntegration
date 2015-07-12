@@ -13,6 +13,7 @@ namespace Spoofi.AmoCrmIntegration.Tests
         public void GetAccountInfoTest()
         {
             var accountInfo = _service.GetAccountInfo();
+            Assert.NotNull(accountInfo);
             Assert.NotNull(accountInfo.Id);
             Assert.NotNull(accountInfo.Name);
         }

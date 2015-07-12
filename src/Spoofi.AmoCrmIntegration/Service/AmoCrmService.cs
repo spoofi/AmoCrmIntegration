@@ -2,6 +2,7 @@
 using Spoofi.AmoCrmIntegration.Dtos;
 using Spoofi.AmoCrmIntegration.Interface;
 using Spoofi.AmoCrmIntegration.Methods;
+using Spoofi.AmoCrmIntegration.Misc;
 
 namespace Spoofi.AmoCrmIntegration.Service
 {
@@ -17,6 +18,7 @@ namespace Spoofi.AmoCrmIntegration.Service
         public CrmAccountInfo GetAccountInfo()
         {
             var accountInfo = AmoMethod.Get<CrmAccountInfoResponse>(_crmConfig.AccountCurrentUrl, _crmConfig);
+            if(accountInfo == null || accountInfo.Response == null) throw new AmoCrmException(AmoCrmErrors.Unknown.GetDescription());
             return accountInfo.Response.Account;
         }
     }
