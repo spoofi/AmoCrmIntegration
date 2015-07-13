@@ -2,7 +2,7 @@
 using System.IO;
 using System.Net;
 using System.Text;
-using Newtonsoft.Json;
+using Spoofi.AmoCrmIntegration.Misc;
 
 namespace Spoofi.AmoCrmIntegration.Methods
 {
@@ -12,7 +12,7 @@ namespace Spoofi.AmoCrmIntegration.Methods
         private static DateTime _lastSessionStarted;
         private const int AuthSessionLimit = 15;
 
-        public static T Post<T>(string url, string data, AmoCrmConfig crmConfig)
+        public static T Post<T>(string url, string data, AmoCrmConfig crmConfig) where T : class
         {
             var request = (HttpWebRequest) WebRequest.Create(new Uri(url));
             request.Method = WebRequestMethods.Http.Post;
@@ -32,13 +32,13 @@ namespace Spoofi.AmoCrmIntegration.Methods
                     using (var responseReader = new StreamReader(responseStream, Encoding.UTF8))
                     {
                         var responseResult = responseReader.ReadToEnd();
-                        return JsonConvert.DeserializeObject<T>(responseResult);
+                        return responseResult.DeserializeTo<T>();
                     }
                 }
             }
         }
 
-        public static T Get<T>(string url, AmoCrmConfig crmConfig)
+        public static T Get<T>(string url, AmoCrmConfig crmConfig) where T : class
         {
             if (crmConfig.LimitRows.HasValue) url += "&limit_rows=" + crmConfig.LimitRows;
             if (crmConfig.LimitOffset.HasValue) url += "&limit_offset=" + crmConfig.LimitOffset;
@@ -59,13 +59,11 @@ namespace Spoofi.AmoCrmIntegration.Methods
                     using (var responseReader = new StreamReader(responseStream, Encoding.UTF8))
                     {
                         var responseResult = responseReader.ReadToEnd();
-                        var deserializeObject = JsonConvert.DeserializeObject<T>(responseResult);
-                        return deserializeObject;
+                        return responseResult.DeserializeTo<T>();
                     }
                 }
             }
         }
-
 
         private static CookieContainer GetCookies(AmoCrmConfig crmConfig)
         {
