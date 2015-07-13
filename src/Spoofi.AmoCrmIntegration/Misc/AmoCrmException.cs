@@ -14,6 +14,10 @@ namespace Spoofi.AmoCrmIntegration.Misc
         {
         }
 
+        public AmoCrmException(AmoCrmErrors error) : base(error.GetDescription())
+        {
+        }
+
         public AmoCrmException(string message, Exception inner) : base(message, inner)
         {
         }

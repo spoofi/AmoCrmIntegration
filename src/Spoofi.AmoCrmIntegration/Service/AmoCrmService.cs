@@ -18,7 +18,7 @@ namespace Spoofi.AmoCrmIntegration.Service
         public CrmAccountInfo GetAccountInfo()
         {
             var accountInfo = AmoMethod.Get<CrmAccountInfoResponse>(_crmConfig.AccountCurrentUrl, _crmConfig);
-            if(accountInfo == null || accountInfo.Response == null) throw new AmoCrmException(AmoCrmErrors.Unknown.GetDescription());
+            if (accountInfo == null || accountInfo.Response == null) throw new AmoCrmException(AmoCrmErrors.Unknown);
             return accountInfo.Response.Account;
         }
     }
