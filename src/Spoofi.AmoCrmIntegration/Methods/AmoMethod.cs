@@ -6,13 +6,13 @@ using Spoofi.AmoCrmIntegration.Misc;
 
 namespace Spoofi.AmoCrmIntegration.Methods
 {
-    public static class AmoMethod
+    internal static class AmoMethod
     {
         private static CookieContainer _cookies;
         private static DateTime _lastSessionStarted;
         private const int AuthSessionLimit = 15;
 
-        public static T Post<T>(string url, string data, AmoCrmConfig crmConfig) where T : class
+        internal static T Post<T>(string url, string data, AmoCrmConfig crmConfig) where T : class
         {
             var request = (HttpWebRequest) WebRequest.Create(new Uri(url));
             request.Method = WebRequestMethods.Http.Post;
@@ -38,7 +38,7 @@ namespace Spoofi.AmoCrmIntegration.Methods
             }
         }
 
-        public static T Get<T>(string url, AmoCrmConfig crmConfig) where T : class
+        internal static T Get<T>(string url, AmoCrmConfig crmConfig) where T : class
         {
             if (crmConfig.LimitRows.HasValue) url += "&limit_rows=" + crmConfig.LimitRows;
             if (crmConfig.LimitOffset.HasValue) url += "&limit_offset=" + crmConfig.LimitOffset;
