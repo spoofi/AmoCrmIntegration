@@ -40,4 +40,17 @@ namespace Spoofi.AmoCrmIntegration.Misc
             return JsonConvert.DeserializeObject<T>(self);
         }
     }
+
+    internal static class AmoCrmDateTimeConverterExtensions
+    {
+        internal static long GetTimestamp(this DateTime dateTime)
+        {
+            return (long)(dateTime - new DateTime(1970, 1, 1).ToLocalTime()).TotalSeconds;
+        }
+
+        internal static DateTime GetDateTime(this long timestamp)
+        {
+            return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(timestamp).ToLocalTime();
+        }
+    }
 }
