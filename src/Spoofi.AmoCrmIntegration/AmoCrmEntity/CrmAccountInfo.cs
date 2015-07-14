@@ -5,7 +5,7 @@ namespace Spoofi.AmoCrmIntegration.AmoCrmEntity
 {
     public class CrmAccountInfo
     {
-        public string Id { get; set; }
+        public long Id { get; set; }
 
         public string Name { get; set; }
 
@@ -26,19 +26,19 @@ namespace Spoofi.AmoCrmIntegration.AmoCrmEntity
 
         public string Language { get; set; }
 
-        public List<object> Users { get; set; }
+        public List<object> Users { get; set; } // TODO
 
         [JsonProperty("Leads_statuses")]
-        public List<object> LeadsStatuses { get; set; }
+        public List<object> LeadsStatuses { get; set; } // TODO
 
         [JsonProperty("Custom_fields")]
-        public object CustomFields { get; set; }
+        public List<CrmCustomField> CustomFields { get; set; }
 
         [JsonProperty("Note_types")]
-        public List<object> NoteTypes { get; set; }
+        public List<object> NoteTypes { get; set; } // TODO
 
         [JsonProperty("Task_types")]
-        public List<object> TaskTypes { get; set; }
+        public List<object> TaskTypes { get; set; } // TODO
 
         /*public List<CrmUser> Users { get; set; }
         

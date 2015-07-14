@@ -8,7 +8,7 @@ namespace Spoofi.AmoCrmIntegration.AmoCrmEntity
     public class CrmContact
     {
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -17,16 +17,16 @@ namespace Spoofi.AmoCrmIntegration.AmoCrmEntity
         public long LastModifiedTimestamp { get; set; }
 
         [JsonProperty("Account_id")]
-        public int AccountId { get; set; }
+        public long AccountId { get; set; }
 
         [JsonProperty("Responsible_user_id")]
-        public int ResponsibleUserId { get; set; }
+        public long ResponsibleUserId { get; set; }
 
         [JsonProperty("Date_create")]
         public long DateCreateTimestamp { get; set; }
 
         [JsonProperty("Created_user_id")]
-        public string CreatedUserId { get; set; }
+        public long CreatedUserId { get; set; }
 
         [JsonProperty("Linked_leads_id")]
         public List<string> LinkedLeadsId { get; set; }
