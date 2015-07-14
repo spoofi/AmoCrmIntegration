@@ -1,4 +1,5 @@
-﻿using Spoofi.AmoCrmIntegration.AmoCrmEntity;
+﻿using System.Collections.Generic;
+using Spoofi.AmoCrmIntegration.AmoCrmEntity;
 using Spoofi.AmoCrmIntegration.Dtos;
 using Spoofi.AmoCrmIntegration.Interface;
 using Spoofi.AmoCrmIntegration.Methods;
@@ -20,6 +21,19 @@ namespace Spoofi.AmoCrmIntegration.Service
             var accountInfo = AmoMethod.Get<CrmAccountInfoResponse>(_crmConfig.AccountCurrentUrl, _crmConfig);
             if (accountInfo == null || accountInfo.Response == null) throw new AmoCrmException(AmoCrmErrors.Unknown);
             return accountInfo.Response.Account;
+        }
+
+        public IEnumerable<CrmContact> GetAllContacts()
+        {
+            var contacts = new List<CrmContact>();
+            for (var offset = 0; ; offset += _crmConfig.LimitRows ?? 500)
+            {
+                _crmConfig.LimitOffset = offset;
+                var contactsList = AmoMethod.Get<CrmContactResponse>(_crmConfig.ContactsListUrl, _crmConfig);
+                if (contactsList == null) break;
+                contacts.AddRange(contactsList.Response.Contacts);
+            }
+            return contacts;
         }
     }
 }

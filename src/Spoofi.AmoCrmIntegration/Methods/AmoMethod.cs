@@ -40,8 +40,8 @@ namespace Spoofi.AmoCrmIntegration.Methods
 
         internal static T Get<T>(string url, AmoCrmConfig crmConfig) where T : class
         {
-            if (crmConfig.LimitRows.HasValue) url += "&limit_rows=" + crmConfig.LimitRows;
-            if (crmConfig.LimitOffset.HasValue) url += "&limit_offset=" + crmConfig.LimitOffset;
+            url += "&limit_rows=" + (crmConfig.LimitRows ?? 500);
+            url += "&limit_offset=" + (crmConfig.LimitOffset ?? 0);
 
             var request = (HttpWebRequest) WebRequest.Create(url);
             request.Method = WebRequestMethods.Http.Get;

@@ -1,4 +1,5 @@
-﻿using Spoofi.AmoCrmIntegration.AmoCrmEntity;
+﻿using System.Collections.Generic;
+using Spoofi.AmoCrmIntegration.AmoCrmEntity;
 
 namespace Spoofi.AmoCrmIntegration.Interface
 {
@@ -9,5 +10,11 @@ namespace Spoofi.AmoCrmIntegration.Interface
         /// </summary>
         /// <returns>Информация об аккаунте - <see cref="CrmAccountInfo"/></returns>
         CrmAccountInfo GetAccountInfo();
+
+        /// <summary>
+        /// Получить все контакты из CRM
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<CrmContact> GetAllContacts();
     }
 }
