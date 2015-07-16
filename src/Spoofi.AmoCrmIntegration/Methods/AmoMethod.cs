@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
 using RestSharp;
@@ -13,12 +12,6 @@ namespace Spoofi.AmoCrmIntegration.Methods
         private static CookieContainer _cookies;
         private static DateTime _lastSessionStarted;
         private const int AuthSessionLimit = 15;
-
-
-        /*internal static T RestPost<T>(string url, string data, AmoCrmConfig crmConfig) where T : class
-        {
-            var restClient = new RestClient();
-        }*/
 
         internal static T Post<T>(string url, string data, AmoCrmConfig crmConfig) where T : class
         {
@@ -46,31 +39,21 @@ namespace Spoofi.AmoCrmIntegration.Methods
             }
         }
 
-        internal static T Get<T>(string url, AmoCrmConfig crmConfig) where T : class
+        internal static T Get<T>(string url, AmoCrmConfig crmConfig) where T : class, new()
         {
-            url += "&limit_rows=" + (crmConfig.LimitRows ?? 500);
-            url += "&limit_offset=" + (crmConfig.LimitOffset ?? 0);
-
-            var request = (HttpWebRequest) WebRequest.Create(url);
-            request.Method = WebRequestMethods.Http.Get;
-
-            if (crmConfig.ModifiedSince.HasValue) request.IfModifiedSince = crmConfig.ModifiedSince.Value;
-
-            request.CookieContainer = GetCookies(crmConfig);
-            request.KeepAlive = false;
-
-            using (var webResponse = (HttpWebResponse) request.GetResponse())
+            var client = new RestClient(url)
             {
-                using (var responseStream = webResponse.GetResponseStream())
-                {
-                    if (responseStream == null) throw new NullReferenceException("responseStream");
-                    using (var responseReader = new StreamReader(responseStream, Encoding.UTF8))
-                    {
-                        var responseResult = responseReader.ReadToEnd();
-                        return responseResult.DeserializeTo<T>();
-                    }
-                }
-            }
+                CookieContainer = GetCookies(crmConfig)
+            };
+
+            var request = new RestRequest(Method.GET);
+            request.AddParameter("limit_rows", crmConfig.LimitRows ?? 500);
+            request.AddParameter("limit_offset", crmConfig.LimitOffset ?? 0);
+            if (crmConfig.ModifiedSince.HasValue) request.AddHeader("If-Modified-Since", crmConfig.ModifiedSince.Value.ToString("u"));
+
+            var response = client.Execute(request);
+            if (response.ErrorException != null) throw new AmoCrmException(response.ErrorMessage, response.ErrorException);
+            return response.Content.DeserializeTo<T>();
         }
 
         private static CookieContainer GetCookies(AmoCrmConfig crmConfig)
