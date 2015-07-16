@@ -37,7 +37,7 @@ namespace Spoofi.AmoCrmIntegration.Misc
 
         internal static T DeserializeTo<T>(this string self) where T : class
         {
-            return JsonConvert.DeserializeObject<T>(self);
+            return !self.HasValue() ? null : JsonConvert.DeserializeObject<T>(self);
         }
     }
 
