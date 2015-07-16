@@ -29,7 +29,7 @@ namespace Spoofi.AmoCrmIntegration.AmoCrmEntity
         public long CreatedUserId { get; set; }
 
         [JsonProperty("Linked_leads_id")]
-        public List<string> LinkedLeadsId { get; set; }
+        public List<long> LinkedLeadsId { get; set; }
 
         [JsonProperty("Tags")]
         public List<CrmTag> Tags { get; set; }
@@ -38,7 +38,8 @@ namespace Spoofi.AmoCrmIntegration.AmoCrmEntity
         public string Type { get; set; }
 
         [JsonProperty("Custom_fields")]
-        public List<CrmCustomField> CustomFields { get; set; }
+        //public List<CrmCustomField> CustomFields { get; set; }
+        public object CustomFields { get; set; }
 
         public DateTime DateCreate
         {

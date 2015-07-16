@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
+using RestSharp;
 using Spoofi.AmoCrmIntegration.Misc;
 
 namespace Spoofi.AmoCrmIntegration.Methods
@@ -11,6 +13,12 @@ namespace Spoofi.AmoCrmIntegration.Methods
         private static CookieContainer _cookies;
         private static DateTime _lastSessionStarted;
         private const int AuthSessionLimit = 15;
+
+
+        /*internal static T RestPost<T>(string url, string data, AmoCrmConfig crmConfig) where T : class
+        {
+            var restClient = new RestClient();
+        }*/
 
         internal static T Post<T>(string url, string data, AmoCrmConfig crmConfig) where T : class
         {
@@ -74,23 +82,20 @@ namespace Spoofi.AmoCrmIntegration.Methods
 
         private static CookieContainer GetNewCookies(AmoCrmConfig crmConfig)
         {
-            var postData = "USER_LOGIN=" + crmConfig.UserLogin + "&USER_HASH=" + crmConfig.UserHash;
-            var request = (HttpWebRequest) WebRequest.Create(crmConfig.AuthUrl);
-            request.Method = WebRequestMethods.Http.Post;
-            request.ContentType = "application/x-www-form-urlencoded";
-            var encodedPostParams = Encoding.UTF8.GetBytes(postData);
-            request.ContentLength = encodedPostParams.Length;
-            request.GetRequestStream().Write(encodedPostParams, 0, encodedPostParams.Length);
-            request.GetRequestStream().Close();
+            var request = new RestRequest(Method.POST);
+            request.AddParameter("USER_LOGIN", crmConfig.UserLogin);
+            request.AddParameter("USER_HASH", crmConfig.UserHash);
 
-            request.CookieContainer = new CookieContainer();
+            var response = new RestClient(crmConfig.AuthUrl).Execute(request);
 
-            var response = (HttpWebResponse) request.GetResponse();
+            var newCookieContainer = new CookieContainer();
+            foreach (var cookie in response.Cookies)
+            {
+                newCookieContainer.Add(new Cookie(cookie.Name, cookie.Value, cookie.Path, cookie.Domain));
+            }
 
-            var container = new CookieContainer();
-            container.Add(response.Cookies);
             _lastSessionStarted = DateTime.Now;
-            return container;
+            return newCookieContainer;
         }
     }
 }

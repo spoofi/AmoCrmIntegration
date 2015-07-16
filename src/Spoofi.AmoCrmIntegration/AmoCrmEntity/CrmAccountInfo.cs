@@ -32,7 +32,8 @@ namespace Spoofi.AmoCrmIntegration.AmoCrmEntity
         public List<object> LeadsStatuses { get; set; } // TODO
 
         [JsonProperty("Custom_fields")]
-        public List<CrmCustomField> CustomFields { get; set; }
+        //public List<CrmCustomField> CustomFields { get; set; }
+        public object CustomFields { get; set; }
 
         [JsonProperty("Note_types")]
         public List<object> NoteTypes { get; set; } // TODO
