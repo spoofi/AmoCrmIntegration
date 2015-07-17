@@ -9,6 +9,7 @@ namespace Spoofi.AmoCrmIntegration.Tests
     public class BasicTests
     {
         private readonly IAmoCrmService _service = new AmoCrmService(TestCrmConfig.Get());
+        private const int ContactId = 65682868;
 
         [Fact]
         public void GetAccountInfoTest()
@@ -24,6 +25,14 @@ namespace Spoofi.AmoCrmIntegration.Tests
         {
             var contacts = _service.GetAllContacts();
             Assert.True(contacts.Any());
+        }
+
+        [Fact]
+        public void GetContactByIdTest()
+        {
+            var contact = _service.GetContact(ContactId);
+            Assert.NotNull(contact);
+            Assert.Equal(ContactId, contact.Id);
         }
     }
 }

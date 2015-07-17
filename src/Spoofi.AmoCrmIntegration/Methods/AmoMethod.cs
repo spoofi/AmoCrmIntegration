@@ -39,7 +39,7 @@ namespace Spoofi.AmoCrmIntegration.Methods
             }
         }
 
-        internal static T Get<T>(string url, AmoCrmConfig crmConfig) where T : class, new()
+        internal static T Get<T>(string url, AmoCrmConfig crmConfig, params Parameter[] parameters) where T : class, new()
         {
             var client = new RestClient(url)
             {
@@ -49,6 +49,10 @@ namespace Spoofi.AmoCrmIntegration.Methods
             var request = new RestRequest(Method.GET);
             request.AddParameter("limit_rows", crmConfig.LimitRows ?? 500);
             request.AddParameter("limit_offset", crmConfig.LimitOffset ?? 0);
+            foreach (var parameter in parameters)
+            {
+                request.AddParameter(parameter);
+            }
             if (crmConfig.ModifiedSince.HasValue) request.AddHeader("If-Modified-Since", crmConfig.ModifiedSince.Value.ToString("u"));
 
             var response = client.Execute(request);

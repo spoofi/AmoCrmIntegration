@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using RestSharp;
 using Spoofi.AmoCrmIntegration.AmoCrmEntity;
 using Spoofi.AmoCrmIntegration.Dtos;
 using Spoofi.AmoCrmIntegration.Interface;
@@ -19,7 +22,8 @@ namespace Spoofi.AmoCrmIntegration.Service
         public CrmAccountInfo GetAccountInfo()
         {
             var accountInfo = AmoMethod.Get<CrmAccountInfoResponse>(_crmConfig.AccountCurrentUrl, _crmConfig);
-            if (accountInfo == null || accountInfo.Response == null) throw new AmoCrmException(AmoCrmErrors.Unknown);
+            if (accountInfo == null || accountInfo.Response == null)
+                throw new AmoCrmException(AmoCrmErrors.Unknown);
             return accountInfo.Response.Account;
         }
 
@@ -30,7 +34,8 @@ namespace Spoofi.AmoCrmIntegration.Service
             {
                 _crmConfig.LimitOffset = offset;
                 var contactsList = AmoMethod.Get<CrmContactResponse>(_crmConfig.ContactsListUrl, _crmConfig);
-                if (contactsList == null) break;
+                if (contactsList == null)
+                    break;
                 contacts.AddRange(contactsList.Response.Contacts);
             }
             return contacts;
@@ -38,7 +43,9 @@ namespace Spoofi.AmoCrmIntegration.Service
 
         public CrmContact GetContact(long contactId)
         {
-            throw new System.NotImplementedException();
+            var parameterId = new Parameter { Name = "id", Value = contactId, Type = ParameterType.QueryString };
+            var contact = AmoMethod.Get<CrmContactResponse>(_crmConfig.ContactsListUrl, _crmConfig, parameterId);
+            return contact.Response.Contacts.FirstOrDefault();
         }
     }
 }
