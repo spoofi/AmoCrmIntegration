@@ -15,11 +15,11 @@ namespace Spoofi.AmoCrmIntegration
             ModifiedSince = modifiedSince;
         }
 
-        public string Subdomain { get; set; }
+        private string Subdomain { get; set; }
 
-        public string UserLogin { get; set; }
+        internal string UserLogin { get; set; }
 
-        public string UserHash { get; set; }
+        internal string UserHash { get; set; }
 
         public string AuthUrl
         {

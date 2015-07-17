@@ -15,7 +15,7 @@ namespace Spoofi.AmoCrmIntegration.Interface
         /// Получить все контакты из CRM
         /// </summary>
         /// <returns></returns>
-        IEnumerable<CrmContact> GetAllContacts();
+        IEnumerable<CrmContact> GetContacts();
 
         /// <summary>
         /// Получить контакт по id

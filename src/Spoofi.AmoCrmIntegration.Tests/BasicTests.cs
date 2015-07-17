@@ -23,7 +23,7 @@ namespace Spoofi.AmoCrmIntegration.Tests
         [Fact]
         public void GetAllContactsTest()
         {
-            var contacts = _service.GetAllContacts();
+            var contacts = _service.GetContacts();
             Assert.True(contacts.Any());
         }
 

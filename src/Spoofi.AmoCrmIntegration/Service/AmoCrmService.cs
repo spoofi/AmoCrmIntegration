@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using RestSharp;
 using Spoofi.AmoCrmIntegration.AmoCrmEntity;
@@ -27,7 +26,7 @@ namespace Spoofi.AmoCrmIntegration.Service
             return accountInfo.Response.Account;
         }
 
-        public IEnumerable<CrmContact> GetAllContacts()
+        public IEnumerable<CrmContact> GetContacts()
         {
             var contacts = new List<CrmContact>();
             for (var offset = 0; ; offset += _crmConfig.LimitRows ?? 500)
