@@ -35,5 +35,10 @@ namespace Spoofi.AmoCrmIntegration.Service
             }
             return contacts;
         }
+
+        public CrmContact GetContact(long contactId)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
