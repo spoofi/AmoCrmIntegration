@@ -40,6 +40,36 @@ namespace Spoofi.AmoCrmIntegration.Service
             return contacts;
         }
 
+        public IEnumerable<CrmContact> GetContacts(string query)
+        {
+            var contacts = new List<CrmContact>();
+            for (var offset = 0; ; offset += _crmConfig.LimitRows ?? 500)
+            {
+                _crmConfig.LimitOffset = offset;
+                var parameterQuery = new Parameter { Name = "query", Value = query, Type = ParameterType.QueryString };
+                var contactsList = AmoMethod.Get<CrmContactResponse>(_crmConfig, parameterQuery);
+                if (contactsList == null)
+                    break;
+                contacts.AddRange(contactsList.Response.Contacts);
+            }
+            return contacts;
+        }
+
+        public IEnumerable<CrmContact> GetContacts(long responsibleUserId)
+        {
+            var contacts = new List<CrmContact>();
+            for (var offset = 0; ; offset += _crmConfig.LimitRows ?? 500)
+            {
+                _crmConfig.LimitOffset = offset;
+                var parameterResponsibleUserId = new Parameter { Name = "responsible_user_id", Value = responsibleUserId, Type = ParameterType.QueryString };
+                var contactsList = AmoMethod.Get<CrmContactResponse>(_crmConfig, parameterResponsibleUserId);
+                if (contactsList == null)
+                    break;
+                contacts.AddRange(contactsList.Response.Contacts);
+            }
+            return contacts;
+        }
+
         public CrmContact GetContact(long contactId)
         {
             var parameterId = new Parameter { Name = "id", Value = contactId, Type = ParameterType.QueryString };

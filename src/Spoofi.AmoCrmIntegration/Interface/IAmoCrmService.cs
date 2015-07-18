@@ -18,6 +18,18 @@ namespace Spoofi.AmoCrmIntegration.Interface
         IEnumerable<CrmContact> GetContacts();
 
         /// <summary>
+        /// Получить все контакты из CRM по запросу
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<CrmContact> GetContacts(string query);
+
+        /// <summary>
+        /// Получить все контакты из CRM по id ответственного пользователя
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<CrmContact> GetContacts(long responsibleUserId);
+
+        /// <summary>
         /// Получить контакт по id
         /// </summary>
         /// <param name="contactId">id контакта</param>
