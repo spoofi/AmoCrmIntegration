@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
+using Spoofi.AmoCrmIntegration.Dtos;
 using Spoofi.AmoCrmIntegration.Interface;
 
 namespace Spoofi.AmoCrmIntegration.AmoCrmEntity
@@ -43,8 +44,7 @@ namespace Spoofi.AmoCrmIntegration.AmoCrmEntity
         public List<CrmLeadStatus> LeadsStatuses { get; set; }
 
         [JsonProperty("custom_fields")]
-        //public List<CrmCustomField> CustomFields { get; set; }
-        public object CustomFields { get; set; }
+        public AccountInfoCustomFields CustomFields { get; set; }
 
         [JsonProperty("note_types")]
         public List<object> NoteTypes { get; set; } // TODO
