@@ -40,7 +40,7 @@ namespace Spoofi.AmoCrmIntegration.AmoCrmEntity
         public List<CrmUser> Users { get; set; }
 
         [JsonProperty("leads_statuses")]
-        public List<object> LeadsStatuses { get; set; } // TODO
+        public List<CrmLeadStatus> LeadsStatuses { get; set; }
 
         [JsonProperty("custom_fields")]
         //public List<CrmCustomField> CustomFields { get; set; }
