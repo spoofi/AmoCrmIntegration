@@ -17,6 +17,12 @@ namespace Spoofi.AmoCrmIntegration.AmoCrmEntity
         [JsonProperty("last_modified")]
         public long LastModifiedTimestamp { get; set; }
 
+        public DateTime LastModified
+        {
+            get { return LastModifiedTimestamp.GetDateTime(); }
+            set { LastModifiedTimestamp = value.GetTimestamp(); }
+        }
+
         [JsonProperty("account_id")]
         public long AccountId { get; set; }
 
@@ -25,6 +31,12 @@ namespace Spoofi.AmoCrmIntegration.AmoCrmEntity
 
         [JsonProperty("date_create")]
         public long DateCreateTimestamp { get; set; }
+
+        public DateTime DateCreate
+        {
+            get { return DateCreateTimestamp.GetDateTime(); }
+            set { DateCreateTimestamp = value.GetTimestamp(); }
+        }
 
         [JsonProperty("created_user_id")]
         public long CreatedUserId { get; set; }
@@ -40,18 +52,5 @@ namespace Spoofi.AmoCrmIntegration.AmoCrmEntity
 
         [JsonProperty("custom_fields")]
         public List<CrmCustomField> CustomFields { get; set; }
-        //public object CustomFields { get; set; }
-
-        public DateTime DateCreate
-        {
-            get { return DateCreateTimestamp.GetDateTime(); }
-            set { DateCreateTimestamp = value.GetTimestamp(); }
-        }
-
-        public DateTime LastModified
-        {
-            get { return LastModifiedTimestamp.GetDateTime(); }
-            set { LastModifiedTimestamp = value.GetTimestamp(); }
-        }
     }
 }
