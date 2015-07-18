@@ -20,7 +20,7 @@ namespace Spoofi.AmoCrmIntegration.Service
 
         public CrmAccountInfo GetAccountInfo()
         {
-            var accountInfo = AmoMethod.Get<CrmAccountInfoResponse>(_crmConfig.AccountCurrentUrl, _crmConfig);
+            var accountInfo = AmoMethod.Get<CrmAccountInfoResponse>(_crmConfig);
             if (accountInfo == null || accountInfo.Response == null)
                 throw new AmoCrmException(AmoCrmErrors.Unknown);
             return accountInfo.Response.Account;
@@ -32,7 +32,7 @@ namespace Spoofi.AmoCrmIntegration.Service
             for (var offset = 0; ; offset += _crmConfig.LimitRows ?? 500)
             {
                 _crmConfig.LimitOffset = offset;
-                var contactsList = AmoMethod.Get<CrmContactResponse>(_crmConfig.ContactsListUrl, _crmConfig);
+                var contactsList = AmoMethod.Get<CrmContactResponse>(_crmConfig);
                 if (contactsList == null)
                     break;
                 contacts.AddRange(contactsList.Response.Contacts);
@@ -43,7 +43,7 @@ namespace Spoofi.AmoCrmIntegration.Service
         public CrmContact GetContact(long contactId)
         {
             var parameterId = new Parameter { Name = "id", Value = contactId, Type = ParameterType.QueryString };
-            var contact = AmoMethod.Get<CrmContactResponse>(_crmConfig.ContactsListUrl, _crmConfig, parameterId);
+            var contact = AmoMethod.Get<CrmContactResponse>(_crmConfig, parameterId);
             return contact.Response.Contacts.FirstOrDefault();
         }
     }

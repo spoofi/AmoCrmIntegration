@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
+using Spoofi.AmoCrmIntegration.Interface;
 
 namespace Spoofi.AmoCrmIntegration.AmoCrmEntity
 {
-    public class CrmAccountInfo
+    public class CrmAccountInfo : IAmoCrmEntity
     {
         public long Id { get; set; }
 

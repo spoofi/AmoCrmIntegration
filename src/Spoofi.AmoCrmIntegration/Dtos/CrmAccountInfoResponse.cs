@@ -1,8 +1,9 @@
 ﻿using Spoofi.AmoCrmIntegration.AmoCrmEntity;
+using Spoofi.AmoCrmIntegration.Interface;
 
 namespace Spoofi.AmoCrmIntegration.Dtos
 {
-    public class CrmAccountInfoResponse
+    public class CrmAccountInfoResponse : IAmoCrmResponse
     {
         public CrmAccountInfoResponseDto Response { get; set; }
     }

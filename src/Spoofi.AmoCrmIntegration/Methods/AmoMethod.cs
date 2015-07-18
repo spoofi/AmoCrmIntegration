@@ -3,6 +3,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 using RestSharp;
+using Spoofi.AmoCrmIntegration.Interface;
 using Spoofi.AmoCrmIntegration.Misc;
 
 namespace Spoofi.AmoCrmIntegration.Methods
@@ -13,7 +14,7 @@ namespace Spoofi.AmoCrmIntegration.Methods
         private static DateTime _lastSessionStarted;
         private const int AuthSessionLimit = 15;
 
-        internal static T Post<T>(string url, string data, AmoCrmConfig crmConfig) where T : class
+        internal static T Post<T>(string url, string data, AmoCrmConfig crmConfig) where T : class, IAmoCrmResponse, new()
         {
             var request = (HttpWebRequest) WebRequest.Create(new Uri(url));
             request.Method = WebRequestMethods.Http.Post;
@@ -39,9 +40,9 @@ namespace Spoofi.AmoCrmIntegration.Methods
             }
         }
 
-        internal static T Get<T>(string url, AmoCrmConfig crmConfig, params Parameter[] parameters) where T : class, new()
+        internal static T Get<T>(AmoCrmConfig crmConfig, params Parameter[] parameters) where T : class, IAmoCrmResponse, new()
         {
-            var client = new RestClient(url)
+            var client = new RestClient(crmConfig.GetUrl<T>())
             {
                 CookieContainer = GetCookies(crmConfig)
             };
@@ -53,10 +54,12 @@ namespace Spoofi.AmoCrmIntegration.Methods
             {
                 request.AddParameter(parameter);
             }
-            if (crmConfig.ModifiedSince.HasValue) request.AddHeader("If-Modified-Since", crmConfig.ModifiedSince.Value.ToString("u"));
+            if (crmConfig.ModifiedSince.HasValue)
+                request.AddHeader("If-Modified-Since", crmConfig.ModifiedSince.Value.ToString("u"));
 
             var response = client.Execute(request);
-            if (response.ErrorException != null) throw new AmoCrmException(response.ErrorMessage, response.ErrorException);
+            if (response.ErrorException != null)
+                throw new AmoCrmException(response.ErrorMessage, response.ErrorException);
             return response.Content.DeserializeTo<T>();
         }
 

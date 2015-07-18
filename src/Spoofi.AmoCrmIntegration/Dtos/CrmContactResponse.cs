@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using Spoofi.AmoCrmIntegration.AmoCrmEntity;
+using Spoofi.AmoCrmIntegration.Interface;
 
 namespace Spoofi.AmoCrmIntegration.Dtos
 {
-    public class CrmContactResponse
+    public class CrmContactResponse : IAmoCrmResponse
     {
         public CrmContactResponseDto Response { get; set; }
     }

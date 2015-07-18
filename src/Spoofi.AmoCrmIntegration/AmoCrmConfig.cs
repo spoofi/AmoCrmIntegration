@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using Spoofi.AmoCrmIntegration.Dtos;
+using Spoofi.AmoCrmIntegration.Interface;
 using Spoofi.AmoCrmIntegration.Misc;
 
 namespace Spoofi.AmoCrmIntegration
@@ -26,7 +29,7 @@ namespace Spoofi.AmoCrmIntegration
             get { return string.Format("https://{0}.amocrm.ru/private/api/auth.php?type=json", Subdomain); }
         }
 
-        public string AccountCurrentUrl
+        private string AccountCurrentUrl
         {
             get { return string.Format("https://{0}.amocrm.ru/private/api/v2/json/accounts/current?", Subdomain); }
         }
@@ -51,7 +54,7 @@ namespace Spoofi.AmoCrmIntegration
             get { return string.Format("https://{0}.amocrm.ru/private/api/v2/json/tasks/set", Subdomain); }
         }
 
-        public string ContactsListUrl
+        private string ContactsListUrl
         {
             get { return string.Format("https://{0}.amocrm.ru/private/api/v2/json/contacts/list?", Subdomain); }
         }
@@ -81,5 +84,17 @@ namespace Spoofi.AmoCrmIntegration
         public int? LimitOffset { get; set; }
 
         public DateTime? ModifiedSince { get; set; }
+
+        internal string GetUrl<T>() where T : class, IAmoCrmResponse
+        {
+            string result;
+            var typeDictionary = new Dictionary<Type, string>
+            {
+                {typeof (CrmAccountInfoResponse), AccountCurrentUrl},
+                {typeof (CrmContactResponse), ContactsListUrl}
+            };
+            typeDictionary.TryGetValue(typeof (T), out result);
+            return result;
+        }
     }
 }

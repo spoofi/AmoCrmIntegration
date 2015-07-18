@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Spoofi.AmoCrmIntegration.Interface;
 using Spoofi.AmoCrmIntegration.Misc;
 
 namespace Spoofi.AmoCrmIntegration.AmoCrmEntity
 {
-    public class CrmContact
+    public class CrmContact : IAmoCrmEntity
     {
         [JsonProperty("id")]
         public long Id { get; set; }
