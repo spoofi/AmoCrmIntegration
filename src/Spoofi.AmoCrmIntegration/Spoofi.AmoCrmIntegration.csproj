@@ -55,6 +55,7 @@
     <Compile Include="AmoCrmEntity\CrmContact.cs" />
     <Compile Include="AmoCrmEntity\CrmCustomField.cs" />
     <Compile Include="AmoCrmEntity\CrmTag.cs" />
+    <Compile Include="AmoCrmEntity\CrmUser.cs" />
     <Compile Include="Dtos\CrmContactResponse.cs" />
     <Compile Include="Dtos\CrmAccountInfoResponse.cs" />
     <Compile Include="Interface\IAmoCrmEntity.cs" />

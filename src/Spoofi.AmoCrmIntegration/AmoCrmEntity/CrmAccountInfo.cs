@@ -4,52 +4,52 @@ using Spoofi.AmoCrmIntegration.Interface;
 
 namespace Spoofi.AmoCrmIntegration.AmoCrmEntity
 {
+    /// <summary>
+    /// Информация об аккаунте CRM
+    /// </summary>
     public class CrmAccountInfo : IAmoCrmEntity
     {
+        [JsonProperty("id")]
         public long Id { get; set; }
 
+        [JsonProperty("name")]
         public string Name { get; set; }
 
+        [JsonProperty("subdomain")]
         public string Subdomain { get; set; }
 
+        [JsonProperty("currency")]
         public string Currency { get; set; }
 
-        [JsonProperty("Paid_from")]
+        [JsonProperty("paid_from")]
         public string PaidFrom { get; set; } // UNIX TimeStamp (int/long)
 
-        [JsonProperty("Paid_till")]
+        [JsonProperty("paid_till")]
         public string PaidTill { get; set; } // or 'false' (bool), if the account is not paid
 
+        [JsonProperty("timezone")]
         public string Timezone { get; set; }
 
-        [JsonProperty("Date_pattern")]
+        [JsonProperty("date_pattern")]
         public string DatePattern { get; set; }
 
+        [JsonProperty("language")]
         public string Language { get; set; }
 
-        public List<object> Users { get; set; } // TODO
+        [JsonProperty("users")]
+        public List<CrmUser> Users { get; set; }
 
-        [JsonProperty("Leads_statuses")]
+        [JsonProperty("leads_statuses")]
         public List<object> LeadsStatuses { get; set; } // TODO
 
-        [JsonProperty("Custom_fields")]
+        [JsonProperty("custom_fields")]
         //public List<CrmCustomField> CustomFields { get; set; }
         public object CustomFields { get; set; }
 
-        [JsonProperty("Note_types")]
+        [JsonProperty("note_types")]
         public List<object> NoteTypes { get; set; } // TODO
 
-        [JsonProperty("Task_types")]
+        [JsonProperty("task_types")]
         public List<object> TaskTypes { get; set; } // TODO
-
-        /*public List<CrmUser> Users { get; set; }
-        
-        public List<LeadsStatus> Leads_statuses { get; set; }
-
-        public CustomFields Custom_fields { get; set; }
-
-        public List<NoteType> Note_types { get; set; }
-        
-        public List<TaskType> Task_types { get; set; }*/
     }
 }
