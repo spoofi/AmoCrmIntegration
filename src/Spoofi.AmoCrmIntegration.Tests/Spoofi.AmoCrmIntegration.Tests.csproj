@@ -55,6 +55,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContactsTests.cs" />
     <Compile Include="BasicTests.cs" />
     <Compile Include="Config\TestCrmConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
