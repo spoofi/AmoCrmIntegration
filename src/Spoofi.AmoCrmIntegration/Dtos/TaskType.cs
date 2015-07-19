@@ -3,9 +3,9 @@
 namespace Spoofi.AmoCrmIntegration.Dtos
 {
     /// <summary>
-    ///     Тип примечания в CRM
+    ///     Тип задачи в CRM
     /// </summary>
-    public class NoteType
+    public class TaskType
     {
         [JsonProperty("id")]
         public long Id { get; set; }
@@ -16,12 +16,9 @@ namespace Spoofi.AmoCrmIntegration.Dtos
         [JsonProperty("code")]
         public string Code { get; set; }
 
-        [JsonProperty("editable")]
-        public string Editable { get; set; }
-
         public override string ToString()
         {
-            return Code;
+            return Name;
         }
     }
 }

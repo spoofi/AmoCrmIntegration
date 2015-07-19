@@ -47,9 +47,9 @@ namespace Spoofi.AmoCrmIntegration.AmoCrmEntity
         public AccountInfoCustomFields CustomFields { get; set; }
 
         [JsonProperty("note_types")]
-        public List<NoteType> NoteTypes { get; set; } // TODO
+        public List<NoteType> NoteTypes { get; set; }
 
         [JsonProperty("task_types")]
-        public List<object> TaskTypes { get; set; } // TODO
+        public List<TaskType> TaskTypes { get; set; }
     }
 }

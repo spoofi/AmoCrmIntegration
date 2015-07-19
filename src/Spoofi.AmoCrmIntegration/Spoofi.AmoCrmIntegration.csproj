@@ -57,6 +57,7 @@
     <Compile Include="AmoCrmEntity\CrmLeadStatus.cs" />
     <Compile Include="AmoCrmEntity\CrmTag.cs" />
     <Compile Include="AmoCrmEntity\CrmUser.cs" />
+    <Compile Include="Dtos\TaskType.cs" />
     <Compile Include="Dtos\NoteType.cs" />
     <Compile Include="Dtos\AccountInfoCustomFields.cs" />
     <Compile Include="Dtos\CrmContactResponse.cs" />
