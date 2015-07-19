@@ -6,7 +6,7 @@ using Spoofi.AmoCrmIntegration.Interface;
 namespace Spoofi.AmoCrmIntegration.AmoCrmEntity
 {
     /// <summary>
-    /// Информация об аккаунте CRM
+    ///     Информация об аккаунте CRM
     /// </summary>
     public class CrmAccountInfo : IAmoCrmEntity
     {
@@ -47,7 +47,7 @@ namespace Spoofi.AmoCrmIntegration.AmoCrmEntity
         public AccountInfoCustomFields CustomFields { get; set; }
 
         [JsonProperty("note_types")]
-        public List<object> NoteTypes { get; set; } // TODO
+        public List<NoteType> NoteTypes { get; set; } // TODO
 
         [JsonProperty("task_types")]
         public List<object> TaskTypes { get; set; } // TODO
