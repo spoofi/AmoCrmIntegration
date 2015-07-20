@@ -4,7 +4,7 @@ using Spoofi.AmoCrmIntegration.Interface;
 
 namespace Spoofi.AmoCrmIntegration.Dtos
 {
-    public class CrmContactResponse : IAmoCrmResponse
+    public class CrmGetContactResponse : IAmoCrmGetResponse
     {
         public CrmContactResponseDto Response { get; set; }
     }

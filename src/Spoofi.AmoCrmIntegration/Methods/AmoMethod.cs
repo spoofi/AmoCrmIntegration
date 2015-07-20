@@ -1,7 +1,5 @@
 ﻿using System;
-using System.IO;
 using System.Net;
-using System.Text;
 using RestSharp;
 using Spoofi.AmoCrmIntegration.Interface;
 using Spoofi.AmoCrmIntegration.Misc;
@@ -14,33 +12,20 @@ namespace Spoofi.AmoCrmIntegration.Methods
         private static DateTime _lastSessionStarted;
         private const int AuthSessionLimit = 15;
 
-        internal static T Post<T>(string url, string data, AmoCrmConfig crmConfig) where T : class, IAmoCrmResponse, new()
+        internal static T Post<T>(IAmoCrmRequest data, AmoCrmConfig crmConfig) where T : class, IAmoCrmGetResponse, new()
         {
-            var request = (HttpWebRequest) WebRequest.Create(new Uri(url));
-            request.Method = WebRequestMethods.Http.Post;
-            request.KeepAlive = false;
-            request.CookieContainer = GetCookies(crmConfig);
-
-            using (var writer = new StreamWriter(request.GetRequestStream()))
+            var client = new RestClient(crmConfig.GetUrl<T>())
             {
-                if (data != null) writer.Write(data);
-            }
+                CookieContainer = GetCookies(crmConfig)
+            };
+            var request = new RestRequest(Method.POST);
+            request.AddJsonBody(data);
 
-            using (var webResponse = (HttpWebResponse) request.GetResponse())
-            {
-                using (var responseStream = webResponse.GetResponseStream())
-                {
-                    if (responseStream == null) throw new NullReferenceException("responseStream");
-                    using (var responseReader = new StreamReader(responseStream, Encoding.UTF8))
-                    {
-                        var responseResult = responseReader.ReadToEnd();
-                        return responseResult.DeserializeTo<T>();
-                    }
-                }
-            }
+            var response = client.Execute(request);
+            return response.Content.DeserializeTo<T>();
         }
 
-        internal static T Get<T>(AmoCrmConfig crmConfig, params Parameter[] parameters) where T : class, IAmoCrmResponse, new()
+        internal static T Get<T>(AmoCrmConfig crmConfig, params Parameter[] parameters) where T : class, IAmoCrmGetResponse, new()
         {
             var client = new RestClient(crmConfig.GetUrl<T>())
             {

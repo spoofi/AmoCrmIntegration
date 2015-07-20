@@ -60,10 +60,12 @@
     <Compile Include="Dtos\TaskType.cs" />
     <Compile Include="Dtos\NoteType.cs" />
     <Compile Include="Dtos\AccountInfoCustomFields.cs" />
-    <Compile Include="Dtos\CrmContactResponse.cs" />
-    <Compile Include="Dtos\CrmAccountInfoResponse.cs" />
+    <Compile Include="Dtos\CrmGetContactResponse.cs" />
+    <Compile Include="Dtos\CrmGetAccountInfoResponse.cs" />
     <Compile Include="Interface\IAmoCrmEntity.cs" />
-    <Compile Include="Interface\IAmoCrmResponse.cs" />
+    <Compile Include="Interface\IAmoCrmSetResponse.cs" />
+    <Compile Include="Interface\IAmoCrmRequest.cs" />
+    <Compile Include="Interface\IAmoCrmGetResponse.cs" />
     <Compile Include="Methods\AmoMethod.cs" />
     <Compile Include="Misc\AmoCrmErrors.cs" />
     <Compile Include="Misc\AmoCrmException.cs" />

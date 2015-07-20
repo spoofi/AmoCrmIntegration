@@ -85,13 +85,13 @@ namespace Spoofi.AmoCrmIntegration
 
         public DateTime? ModifiedSince { get; set; }
 
-        internal string GetUrl<T>() where T : class, IAmoCrmResponse
+        internal string GetUrl<T>() where T : class, IAmoCrmGetResponse
         {
             string result;
             var typeDictionary = new Dictionary<Type, string>
             {
-                {typeof (CrmAccountInfoResponse), AccountCurrentUrl},
-                {typeof (CrmContactResponse), ContactsListUrl}
+                {typeof (CrmGetAccountInfoResponse), AccountCurrentUrl},
+                {typeof (CrmGetContactResponse), ContactsListUrl}
             };
             typeDictionary.TryGetValue(typeof (T), out result);
             return result;
