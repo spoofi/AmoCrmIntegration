@@ -48,9 +48,19 @@ namespace Spoofi.AmoCrmIntegration.Misc
             return (long)(dateTime - new DateTime(1970, 1, 1).ToLocalTime()).TotalSeconds;
         }
 
+        internal static long? GetTimestamp(this DateTime? dateTime)
+        {
+            return dateTime.HasValue ? (long)(dateTime.Value - new DateTime(1970, 1, 1).ToLocalTime()).TotalSeconds : (long?) null;
+        }
+
         internal static DateTime GetDateTime(this long timestamp)
         {
             return new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(timestamp).ToLocalTime();
+        }
+
+        internal static DateTime? GetDateTime(this long? timestamp)
+        {
+            return timestamp.HasValue ? new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(timestamp.Value).ToLocalTime() : (DateTime?) null;
         }
     }
 }

@@ -57,11 +57,11 @@
     <Compile Include="AmoCrmEntity\CrmLeadStatus.cs" />
     <Compile Include="AmoCrmEntity\CrmTag.cs" />
     <Compile Include="AmoCrmEntity\CrmUser.cs" />
-    <Compile Include="Dtos\TaskType.cs" />
-    <Compile Include="Dtos\NoteType.cs" />
-    <Compile Include="Dtos\AccountInfoCustomFields.cs" />
-    <Compile Include="Dtos\CrmGetContactResponse.cs" />
-    <Compile Include="Dtos\CrmGetAccountInfoResponse.cs" />
+    <Compile Include="Dtos\Response\TaskType.cs" />
+    <Compile Include="Dtos\Response\NoteType.cs" />
+    <Compile Include="Dtos\Response\AccountInfoCustomFields.cs" />
+    <Compile Include="Dtos\Response\CrmGetContactResponse.cs" />
+    <Compile Include="Dtos\Response\CrmGetAccountInfoResponse.cs" />
     <Compile Include="Interface\IAmoCrmEntity.cs" />
     <Compile Include="Interface\IAmoCrmSetResponse.cs" />
     <Compile Include="Interface\IAmoCrmRequest.cs" />
@@ -74,7 +74,9 @@
     <Compile Include="Interface\IAmoCrmService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Dtos\Request\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
