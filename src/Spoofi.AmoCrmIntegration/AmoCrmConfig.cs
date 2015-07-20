@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Spoofi.AmoCrmIntegration.Dtos;
+using Spoofi.AmoCrmIntegration.Dtos.Response;
 using Spoofi.AmoCrmIntegration.Interface;
 using Spoofi.AmoCrmIntegration.Misc;
 

@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
 
-namespace Spoofi.AmoCrmIntegration.Dtos
+namespace Spoofi.AmoCrmIntegration.Dtos.Response
 {
     /// <summary>
-    ///     Тип задачи в CRM
+    ///     Тип примечания в CRM
     /// </summary>
-    public class TaskType
+    public class NoteType
     {
         [JsonProperty("id")]
         public long Id { get; set; }
@@ -16,9 +16,12 @@ namespace Spoofi.AmoCrmIntegration.Dtos
         [JsonProperty("code")]
         public string Code { get; set; }
 
+        [JsonProperty("editable")]
+        public string Editable { get; set; }
+
         public override string ToString()
         {
-            return Name;
+            return Code;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 using Spoofi.AmoCrmIntegration.Dtos;
+using Spoofi.AmoCrmIntegration.Dtos.Response;
 using Spoofi.AmoCrmIntegration.Interface;
 
 namespace Spoofi.AmoCrmIntegration.AmoCrmEntity

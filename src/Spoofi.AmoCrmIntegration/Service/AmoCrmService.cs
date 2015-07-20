@@ -3,6 +3,7 @@ using System.Linq;
 using RestSharp;
 using Spoofi.AmoCrmIntegration.AmoCrmEntity;
 using Spoofi.AmoCrmIntegration.Dtos;
+using Spoofi.AmoCrmIntegration.Dtos.Response;
 using Spoofi.AmoCrmIntegration.Interface;
 using Spoofi.AmoCrmIntegration.Methods;
 using Spoofi.AmoCrmIntegration.Misc;
