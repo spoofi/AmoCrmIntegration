@@ -57,6 +57,7 @@
     <Compile Include="AmoCrmEntity\CrmLeadStatus.cs" />
     <Compile Include="AmoCrmEntity\CrmTag.cs" />
     <Compile Include="AmoCrmEntity\CrmUser.cs" />
+    <Compile Include="Dtos\Request\AddOrUpdateContactRequest.cs" />
     <Compile Include="Dtos\Response\TaskType.cs" />
     <Compile Include="Dtos\Response\NoteType.cs" />
     <Compile Include="Dtos\Response\AccountInfoCustomFields.cs" />
@@ -74,9 +75,7 @@
     <Compile Include="Interface\IAmoCrmService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Dtos\Request\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
