@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using Spoofi.AmoCrmIntegration.AmoCrmEntity;
+using Spoofi.AmoCrmIntegration.Dtos.Request;
+using Spoofi.AmoCrmIntegration.Dtos.Response;
 
 namespace Spoofi.AmoCrmIntegration.Interface
 {
@@ -43,5 +45,12 @@ namespace Spoofi.AmoCrmIntegration.Interface
         ///     <see cref="CrmContact" />
         /// </returns>
         CrmContact GetContact(long contactId);
+
+        /// <summary>
+        ///     Добавление или обновление контактов
+        /// </summary>
+        /// <param name="addOrUpdateContacts">Объект с обновляемыми/добавляемыми контактами</param>
+        /// <returns></returns>
+        AddedOrUpdatedContacts AddOrUpdateContact(AddOrUpdateCrmContacts addOrUpdateContacts);
     }
 }

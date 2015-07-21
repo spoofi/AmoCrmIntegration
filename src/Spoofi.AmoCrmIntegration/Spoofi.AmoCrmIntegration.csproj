@@ -58,15 +58,15 @@
     <Compile Include="AmoCrmEntity\CrmTag.cs" />
     <Compile Include="AmoCrmEntity\CrmUser.cs" />
     <Compile Include="Dtos\Request\AddOrUpdateContactRequest.cs" />
+    <Compile Include="Dtos\Response\AddOrUpdateContactResponse.cs" />
     <Compile Include="Dtos\Response\TaskType.cs" />
     <Compile Include="Dtos\Response\NoteType.cs" />
     <Compile Include="Dtos\Response\AccountInfoCustomFields.cs" />
     <Compile Include="Dtos\Response\CrmGetContactResponse.cs" />
     <Compile Include="Dtos\Response\CrmGetAccountInfoResponse.cs" />
     <Compile Include="Interface\IAmoCrmEntity.cs" />
-    <Compile Include="Interface\IAmoCrmSetResponse.cs" />
     <Compile Include="Interface\IAmoCrmRequest.cs" />
-    <Compile Include="Interface\IAmoCrmGetResponse.cs" />
+    <Compile Include="Interface\IAmoCrmResponse.cs" />
     <Compile Include="Methods\AmoMethod.cs" />
     <Compile Include="Misc\AmoCrmErrors.cs" />
     <Compile Include="Misc\AmoCrmException.cs" />

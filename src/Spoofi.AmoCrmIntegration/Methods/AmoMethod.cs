@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using Newtonsoft.Json;
 using RestSharp;
 using Spoofi.AmoCrmIntegration.Interface;
 using Spoofi.AmoCrmIntegration.Misc;
@@ -12,20 +13,21 @@ namespace Spoofi.AmoCrmIntegration.Methods
         private static DateTime _lastSessionStarted;
         private const int AuthSessionLimit = 15;
 
-        internal static T Post<T>(IAmoCrmRequest data, AmoCrmConfig crmConfig) where T : class, IAmoCrmGetResponse, new()
+        internal static T Post<T>(IAmoCrmRequest data, AmoCrmConfig crmConfig) where T : class, IAmoCrmResponse, new()
         {
             var client = new RestClient(crmConfig.GetUrl<T>())
             {
                 CookieContainer = GetCookies(crmConfig)
             };
             var request = new RestRequest(Method.POST);
-            request.AddJsonBody(data);
+            var serializedData = JsonConvert.SerializeObject(data);
+            request.AddParameter(new Parameter {Name = "text/json", Type = ParameterType.RequestBody, Value = serializedData});
 
             var response = client.Execute(request);
             return response.Content.DeserializeTo<T>();
         }
 
-        internal static T Get<T>(AmoCrmConfig crmConfig, params Parameter[] parameters) where T : class, IAmoCrmGetResponse, new()
+        internal static T Get<T>(AmoCrmConfig crmConfig, params Parameter[] parameters) where T : class, IAmoCrmResponse, new()
         {
             var client = new RestClient(crmConfig.GetUrl<T>())
             {

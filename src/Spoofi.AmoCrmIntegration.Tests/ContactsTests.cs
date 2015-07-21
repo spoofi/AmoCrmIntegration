@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Spoofi.AmoCrmIntegration.Dtos.Request;
 using Spoofi.AmoCrmIntegration.Interface;
 using Spoofi.AmoCrmIntegration.Service;
 using Spoofi.AmoCrmIntegration.Tests.Config;
@@ -42,6 +44,22 @@ namespace Spoofi.AmoCrmIntegration.Tests
             var contacts = _service.GetContacts(ResponsibleUserId);
             Assert.NotNull(contacts);
             Assert.True(contacts.All(c => c.ResponsibleUserId == ResponsibleUserId));
+        }
+
+        [Fact]
+        public void CreateContactOnlyWithNameTest()
+        {
+            var newContact = new AddOrUpdateCrmContact
+            {
+                Name = "Тестовый контакт"
+            };
+
+            var result = _service.AddOrUpdateContact(new AddOrUpdateCrmContacts
+            {
+                Add = new List<AddOrUpdateCrmContact> {newContact}
+            });
+
+            Assert.True(result.Add.Any());
         }
     }
 }

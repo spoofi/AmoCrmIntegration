@@ -15,22 +15,28 @@ namespace Spoofi.AmoCrmIntegration.Dtos.Request
     public class AddOrUpdateContactObject
     {
         [JsonProperty("contacts")]
-        public AddOrUpdateCrmContactDto Contacts { get; set; }
+        public AddOrUpdateCrmContacts Contacts { get; set; }
     }
 
-    public class AddOrUpdateCrmContactDto
+    public class AddOrUpdateCrmContacts
     {
-        [JsonProperty("add")]
-        public List<AddCrmContact> Add { get; set; }
+        [JsonProperty("add", DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public List<AddOrUpdateCrmContact> Add { get; set; }
 
-        [JsonProperty("update")]
-        public List<UpdateCrmContact> Update { get; set; }
+        [JsonProperty("update", DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public List<AddOrUpdateCrmContact> Update { get; set; }
     }
 
-    public class AddCrmContact
+    public class AddOrUpdateCrmContact
     {
         /// <summary>
-        ///     Имя создаваемого контакта
+        ///     Идентификатор обновляемого контакта
+        /// </summary>
+        [JsonProperty("id", DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public long Id { get; set; }
+
+        /// <summary>
+        ///     Имя контакта
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -38,63 +44,77 @@ namespace Spoofi.AmoCrmIntegration.Dtos.Request
         /// <summary>
         ///     Уникальный идентификатор записи в клиентской программе (не обязательный параметр)
         /// </summary>
-        [JsonProperty("request_id")]
+        [JsonProperty("request_id", DefaultValueHandling = DefaultValueHandling.Ignore)]
         public long RequestId { get; set; }
 
-        [JsonProperty("date_create")]
-        public long? DateCreateTimestamp { get; set; }
+        [JsonProperty("date_create", DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public long? DateCreateTimestamp
+        {
+            get { return DateCreate.GetTimestamp(); }
+            set { DateCreate = value.GetDateTime(); }
+        }
 
         /// <summary>
         ///     Дата создания контакта (не обязательный параметр)
         /// </summary>
         [JsonIgnore]
-        public DateTime? DateCreate
-        {
-            get { return DateCreateTimestamp.GetDateTime(); }
-            set { DateCreateTimestamp = value.GetTimestamp(); }
-        }
+        public DateTime? DateCreate { get; set; }
 
         [JsonProperty("last_modified")]
-        public long? LastModifiedTimestamp { get; set; }
+        public long? LastModifiedTimestamp
+        {
+            get { return LastModified.GetTimestamp() ?? DateTime.Now.GetTimestamp(); }
+            set { LastModified = value.GetDateTime(); }
+        }
 
         /// <summary>
         ///     Дата последнего изменения контакта (не обязательный параметр)
         /// </summary>
         [JsonIgnore]
-        public DateTime? LastModified
-        {
-            get { return LastModifiedTimestamp.GetDateTime(); }
-            set { LastModifiedTimestamp = value.GetTimestamp(); }
-        }
+        public DateTime? LastModified { get; set; }
 
         /// <summary>
         ///     Уникальный идентификатор ответственного пользователя
         /// </summary>
-        [JsonProperty("responsible_user_id")]
+        [JsonProperty("responsible_user_id", DefaultValueHandling = DefaultValueHandling.Ignore)]
         public long ResponsibleUserId { get; set; }
 
         /// <summary>
         ///     Список уникальных идентификаторов связанных сделок
         /// </summary>
-        [JsonProperty("linked_leads_id")]
+        [JsonProperty("linked_leads_id", DefaultValueHandling = DefaultValueHandling.Ignore)]
         public List<long> LinkedLeadsIds { get; set; }
 
         /// <summary>
         ///     Имя компании контакта
         /// </summary>
-        [JsonProperty("company_name")]
+        [JsonProperty("company_name", DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string CompanyName { get; set; }
 
         /// <summary>
         ///     Название тегов через запятую
         /// </summary>
-        [JsonProperty("tags")]
+        [JsonProperty("tags", DefaultValueHandling = DefaultValueHandling.Ignore)]
         public string Tags { get; set; }
 
-
+        /// <summary>
+        ///     Дополнительные поля контакта
+        /// </summary>
+        [JsonProperty("custom_fields", DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public List<AddContactCustomField> CustomFields { get; set; }
     }
 
-    public class UpdateCrmContact
+    public class AddContactCustomField
     {
+        public long Id { get; set; }
+
+        public AddContactCustomFieldValues Values { get; set; }
+    }
+
+    public class AddContactCustomFieldValues
+    {
+        public string Value { get; set; }
+
+        public string Enum { get; set; }
     }
 }

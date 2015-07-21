@@ -1,6 +1,6 @@
 ﻿namespace Spoofi.AmoCrmIntegration.Interface
 {
-    public interface IAmoCrmSetResponse
+    public interface IAmoCrmResponse
     {
          
     }

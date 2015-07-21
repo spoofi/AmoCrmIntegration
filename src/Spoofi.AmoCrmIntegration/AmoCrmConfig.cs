@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Spoofi.AmoCrmIntegration.Dtos;
 using Spoofi.AmoCrmIntegration.Dtos.Response;
 using Spoofi.AmoCrmIntegration.Interface;
 using Spoofi.AmoCrmIntegration.Misc;
@@ -86,13 +85,14 @@ namespace Spoofi.AmoCrmIntegration
 
         public DateTime? ModifiedSince { get; set; }
 
-        internal string GetUrl<T>() where T : class, IAmoCrmGetResponse
+        internal string GetUrl<T>() where T : class, IAmoCrmResponse
         {
             string result;
             var typeDictionary = new Dictionary<Type, string>
             {
                 {typeof (CrmGetAccountInfoResponse), AccountCurrentUrl},
-                {typeof (CrmGetContactResponse), ContactsListUrl}
+                {typeof (CrmGetContactResponse), ContactsListUrl},
+                {typeof (AddOrUpdateContactResponse), SetContactUrl}
             };
             typeDictionary.TryGetValue(typeof (T), out result);
             return result;

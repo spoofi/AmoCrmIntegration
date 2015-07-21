@@ -3,7 +3,7 @@ using Spoofi.AmoCrmIntegration.Interface;
 
 namespace Spoofi.AmoCrmIntegration.Dtos.Response
 {
-    public class CrmGetAccountInfoResponse : IAmoCrmGetResponse
+    public class CrmGetAccountInfoResponse : IAmoCrmResponse
     {
         public CrmAccountInfoResponseDto Response { get; set; }
     }

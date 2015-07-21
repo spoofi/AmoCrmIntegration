@@ -2,6 +2,7 @@
 using System.Linq;
 using RestSharp;
 using Spoofi.AmoCrmIntegration.AmoCrmEntity;
+using Spoofi.AmoCrmIntegration.Dtos.Request;
 using Spoofi.AmoCrmIntegration.Dtos.Response;
 using Spoofi.AmoCrmIntegration.Interface;
 using Spoofi.AmoCrmIntegration.Methods;
@@ -80,6 +81,13 @@ namespace Spoofi.AmoCrmIntegration.Service
             var parameterId = new Parameter {Name = "id", Value = contactId, Type = ParameterType.QueryString};
             var contact = AmoMethod.Get<CrmGetContactResponse>(_crmConfig, parameterId);
             return contact.Response.Contacts.FirstOrDefault();
+        }
+
+        public AddedOrUpdatedContacts AddOrUpdateContact(AddOrUpdateCrmContacts addOrUpdateContacts)
+        {
+            var request = new AddOrUpdateContactRequest {Request = new AddOrUpdateContactObject {Contacts = addOrUpdateContacts}};
+            var response = AmoMethod.Post<AddOrUpdateContactResponse>(request, _crmConfig);
+            return response.Response.Contacts;
         }
     }
 }
