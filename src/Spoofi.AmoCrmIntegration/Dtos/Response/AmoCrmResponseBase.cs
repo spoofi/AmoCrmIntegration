@@ -3,9 +3,9 @@ using Spoofi.AmoCrmIntegration.Misc;
 
 namespace Spoofi.AmoCrmIntegration.Dtos.Response
 {
-    public class AmoCrmResponseBase : IAmoCrmResponse
+    public class AmoCrmResponseBase<T> : IAmoCrmResponse<T> where T : IAmoCrmResponseChild
     {
-        public IAmoCrmResponseChild Response { get; set; }
+        public virtual T Response { get; set; }
 
         public string Error
         {

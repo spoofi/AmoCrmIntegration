@@ -20,11 +20,17 @@ namespace Spoofi.AmoCrmIntegration.Methods
                 CookieContainer = GetCookies(crmConfig)
             };
             var request = new RestRequest(Method.POST);
-            var serializedData = JsonConvert.SerializeObject(data);
-            request.AddParameter(new Parameter {Name = "text/json", Type = ParameterType.RequestBody, Value = serializedData});
+            request.AddParameter(new Parameter
+            {
+                Name = "text/json",
+                Value = JsonConvert.SerializeObject(data),
+                Type = ParameterType.RequestBody
+            });
 
             var response = client.Execute(request);
-            return response.Content.DeserializeTo<T>();
+            var result = response.Content.DeserializeTo<T>();
+            if (result.Error.HasValue()) throw new AmoCrmException(result.Error);
+            return result;
         }
 
         internal static T Get<T>(AmoCrmConfig crmConfig, params Parameter[] parameters) where T : class, IAmoCrmResponse, new()

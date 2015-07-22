@@ -5,9 +5,9 @@ using Spoofi.AmoCrmIntegration.Interface;
 
 namespace Spoofi.AmoCrmIntegration.Dtos.Response
 {
-    public class CrmGetContactResponse : AmoCrmResponseBase
+    public class CrmGetContactResponse : AmoCrmResponseBase<CrmContactResponseChild>
     {
-        public new CrmContactResponseChild Response { get; set; }
+        public override CrmContactResponseChild Response { get; set; }
     }
 
     public class CrmContactResponseChild : IAmoCrmResponseChild
