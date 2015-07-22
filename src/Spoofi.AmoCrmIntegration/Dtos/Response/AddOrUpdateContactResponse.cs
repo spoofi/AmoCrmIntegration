@@ -4,19 +4,19 @@ using Spoofi.AmoCrmIntegration.Interface;
 
 namespace Spoofi.AmoCrmIntegration.Dtos.Response
 {
-    public class AddOrUpdateContactResponse : IAmoCrmResponse
+    public class AddOrUpdateContactResponse : AmoCrmResponseBase
     {
         [JsonProperty("response")]
-        public CrmAddOrUpdateContactResponseDto Response { get; set; }
+        public new CrmAddOrUpdateContactResponseChild Response { get; set; }
     }
 
-    public class CrmAddOrUpdateContactResponseDto
+    public class CrmAddOrUpdateContactResponseChild : IAmoCrmResponseChild
     {
         [JsonProperty("contacts")]
         public AddedOrUpdatedContacts Contacts { get; set; }
 
         [JsonProperty("error")]
-        public object Error { get; set; }
+        public string Error { get; set; }
     }
 
     public class AddedOrUpdatedContacts

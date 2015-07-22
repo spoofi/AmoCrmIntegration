@@ -1,15 +1,22 @@
-﻿using Spoofi.AmoCrmIntegration.AmoCrmEntity;
+﻿using Newtonsoft.Json;
+using Spoofi.AmoCrmIntegration.AmoCrmEntity;
 using Spoofi.AmoCrmIntegration.Interface;
 
 namespace Spoofi.AmoCrmIntegration.Dtos.Response
 {
-    public class CrmGetAccountInfoResponse : IAmoCrmResponse
+    public class CrmGetAccountInfoResponse : AmoCrmResponseBase
     {
-        public CrmAccountInfoResponseDto Response { get; set; }
+        [JsonProperty("response")]
+        public new CrmAccountInfoResponseChild Response { get; set; }
+      
     }
 
-    public class CrmAccountInfoResponseDto
+    public class CrmAccountInfoResponseChild : IAmoCrmResponseChild
     {
+        [JsonProperty("account")]
         public CrmAccountInfo Account { get; set; }
+
+        [JsonProperty("error")]
+        public string Error { get; set; }
     }
 }

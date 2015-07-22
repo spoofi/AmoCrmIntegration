@@ -59,6 +59,9 @@
     <Compile Include="AmoCrmEntity\CrmUser.cs" />
     <Compile Include="Dtos\Request\AddOrUpdateContactRequest.cs" />
     <Compile Include="Dtos\Response\AddOrUpdateContactResponse.cs" />
+    <Compile Include="Dtos\Response\AmoCrmResponseBase.cs" />
+    <Compile Include="Dtos\Response\CrmResponseBase.cs" />
+    <Compile Include="Interface\IAmoCrmResponseChild.cs" />
     <Compile Include="Dtos\Response\TaskType.cs" />
     <Compile Include="Dtos\Response\NoteType.cs" />
     <Compile Include="Dtos\Response\AccountInfoCustomFields.cs" />
