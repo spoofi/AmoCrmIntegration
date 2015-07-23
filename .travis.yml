@@ -1,2 +1,10 @@
 language: csharp
 solution: ./Spoofi.AmoCrmIntegration.sln
+
+notifications:
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/93998e6d6359bdcb4041
+    on_success: always
+    on_failure: always
+    on_start: true
