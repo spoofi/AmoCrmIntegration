@@ -2,6 +2,7 @@
 using System.Linq;
 using Spoofi.AmoCrmIntegration.Dtos.Request;
 using Spoofi.AmoCrmIntegration.Interface;
+using Spoofi.AmoCrmIntegration.Misc;
 using Spoofi.AmoCrmIntegration.Service;
 using Spoofi.AmoCrmIntegration.Tests.Config;
 using Xunit;
@@ -10,10 +11,10 @@ namespace Spoofi.AmoCrmIntegration.Tests
 {
     public class ContactsTests
     {
-        private readonly IAmoCrmService _service = new AmoCrmService(TestCrmConfig.Get());
         private const string ContactName = "Геннадий";
         private const int ContactId = 65682868;
         private const int ResponsibleUserId = 144078;
+        private readonly IAmoCrmService _service = new AmoCrmService(TestCrmConfig.Get());
 
         [Fact]
         public void GetAllContactsTest()
@@ -60,6 +61,12 @@ namespace Spoofi.AmoCrmIntegration.Tests
             });
 
             Assert.True(result.Add.Any());
+        }
+
+        [Fact]
+        public void CreateContactWithEmptyDataThrowsTest()
+        {
+            Assert.Throws<AmoCrmException>(() => _service.AddOrUpdateContact(null));
         }
     }
 }

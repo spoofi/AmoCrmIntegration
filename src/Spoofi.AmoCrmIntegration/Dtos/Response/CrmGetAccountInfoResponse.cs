@@ -4,11 +4,10 @@ using Spoofi.AmoCrmIntegration.Interface;
 
 namespace Spoofi.AmoCrmIntegration.Dtos.Response
 {
-    public class CrmGetAccountInfoResponse : AmoCrmResponseBase
+    public class CrmGetAccountInfoResponse : AmoCrmResponseBase<CrmAccountInfoResponseChild>
     {
         [JsonProperty("response")]
-        public new CrmAccountInfoResponseChild Response { get; set; }
-      
+        public override CrmAccountInfoResponseChild Response { get; set; }
     }
 
     public class CrmAccountInfoResponseChild : IAmoCrmResponseChild
